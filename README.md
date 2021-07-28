@@ -1,7 +1,7 @@
 # perljump.vim
 Vim plugin for jumping to Perl subroutine definitions, even when not using fully qualified names.
 
-<img src="https://raw.githubusercontent.com/xxdavid/i/master/perljump.vim/demo.gif">
+<img src="https://github.com/xxdavid/perljump.vim/raw/master/demo.gif" height="500">
 
 When I started at my job, I was frustrated every time I saw an unqualified call to a function in another module. I always had to grep that function to find the module where it was defined, then open that module and then finally search for the function. This plugin does it all for you automatically. With *perljump*, you are always only two key presses away from seeing a function definition.
 
