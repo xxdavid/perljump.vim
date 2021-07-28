@@ -20,7 +20,9 @@ function! ShowPod()
 
 	if !empty(l:path)
 		let l:name = l:word_parts[-1]
-        let l:pod = system("awk '/=\\w+ " . name . "\\s*$/,/=cut/' " . l:path)
+        let l:pod = system('perl -ne ''$f = 0 if /^=\w+\s+/; print if $f; $f = 1 if /^=\w+\s+' . l:name . '\s*$/'' ' . shellescape(l:path))
+        let l:pod = substitute(l:pod, '\n\+$', '', '')
+        let l:pod = substitute(l:pod, '^\n\+', '', '')
 		if !empty(l:pod)
 			execute 'split pod'
 			normal! gg
@@ -28,13 +30,7 @@ function! ShowPod()
 			normal! G
 			normal! d
 			call append(line('$'), split(l:pod, "\n"))
-			normal! dd
-			normal! dd
-			normal! dd
-			normal! G
-			normal! dd
-			normal! dd
-			normal! gg
+            normal! dd
 			execute 'set syntax=pod'
             execute 'nnoremap <buffer> <silent> q :bd!<CR>'
 		else
