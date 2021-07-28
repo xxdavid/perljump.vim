@@ -87,8 +87,11 @@ function! FindSubInCurrentFile(name)
 endfunction
 
 function! SearchForSubInFile(path, sub)
-	call system("grep -P '" . GetSubPattern(a:sub, 0) .  "' " . shellescape(a:path))
-	return ! v:shell_error
+    if !filereadable(a:path)
+        return 0
+    endif
+    let l:output = system("perl -nle'print if m{" . GetSubPattern(a:sub, 0) .  "}' " . shellescape(a:path))
+	return len(l:output) > 0
 endfunction
 
 function! FindExportedSub(name)
@@ -108,7 +111,7 @@ function! FindExportedSub(name)
 endfunction
 
 function! ParseUses()
-	let l:output = system('grep -P "use [A-Z][\w:]*( .+)?;" ' . shellescape(expand('%')))
+    let l:output = system("perl -nle 'print if m{use [A-Z][\\w:]*( .+)?;}' " . shellescape(expand('%')))
 	let l:rows = split(l:output, "\n")
 	let l:uses = map(l:rows, { key, val -> matchstr(val, '\v^use \zs(\w|:)+\ze.*;$') })
 	return l:uses
