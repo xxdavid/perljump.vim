@@ -36,6 +36,7 @@ function! ShowPod()
 			normal! dd
 			normal! gg
 			execute 'set syntax=pod'
+            execute 'nnoremap <buffer> <silent> q :bd!<CR>'
 		else
 			echo "Pod not found. :'("
 		endif
