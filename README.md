@@ -1,7 +1,9 @@
 # perljump.vim
 Vim plugin for jumping to Perl subroutine definitions, even when not using fully qualified names.
 
-When I started at my job, I was frustrated when I saw a function call from some other module and that call was not fully qualified. I always had to grep that function to find the module where it was defined, then open that module and then finally search for the function. This plugin does it all for you automatically. With *perljump*, you are always only two key presses away from seeing a function definition.
+<img src="https://raw.githubusercontent.com/xxdavid/i/master/perljump.vim/demo.gif">
+
+When I started at my job, I was frustrated every time I saw an unqualified call to a function in another module. I always had to grep that function to find the module where it was defined, then open that module and then finally search for the function. This plugin does it all for you automatically. With *perljump*, you are always only two key presses away from seeing a function definition.
 
 ## Installation
 Use your favourite Vim plugin manager. For example with [vim-plug](https://github.com/junegunn/vim-plug):
@@ -35,6 +37,10 @@ autocmd FileType perl noremap gp :call ShowPod()<CR>
 
 ## How does it work?
 There is very simple heuristics involved in searching for the definition of a function. If the function call uses fully qualified name, then module directories are search for this module (in order of the `g:perljump_inc` array). If the call isn't fully qualified, current file is searched and if the function isn't found there, all included modules (via `use MyModule`) in the current files are searched for this function. No robust parsing is performed, only simple regex search so it doesn't have to work in all cases. Also, it probably works only with Perl 5.
+
+## Notes
+- needs `perl` in your `PATH`
+- doesn't work with class methods
 
 ## Contribute
 If the plugin doesn't work in your case or you have any other improvement, feel free to submit a pull request!
