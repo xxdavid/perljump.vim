@@ -20,7 +20,7 @@ function! ShowPod()
 
 	if !empty(l:path)
 		let l:name = l:word_parts[-1]
-		let l:pod = system("awk '/=\w+ " . name . "/,/=cut/' " . l:path)
+        let l:pod = system("awk '/=\\w+ " . name . "\\s*$/,/=cut/' " . l:path)
 		if !empty(l:pod)
 			execute 'split pod'
 			normal! gg
