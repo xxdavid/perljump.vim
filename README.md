@@ -36,7 +36,7 @@ autocmd FileType perl noremap gp :call ShowPod()<CR>
 ```
 
 ## How does it work?
-There is very simple heuristics involved in searching for the definition of a function. If the function call uses fully qualified name, then module directories are search for this module (in order of the `g:perljump_inc` array). If the call isn't fully qualified, current file is searched and if the function isn't found there, all included modules (via `use MyModule`) in the current files are searched for this function. No robust parsing is performed, only simple regex search so it doesn't have to work in all cases. Also, it probably works only with Perl 5.
+There is a very simple heuristics involved in searching for the definition of a function. If the function call uses fully qualified name, then module directories are searched for this module (in order of the `g:perljump_inc` array). If the call isn't fully qualified, the current file is searched and if the function isn't found there, all included modules (via `use MyModule`) in the current files are searched for this function. No robust parsing is performed, only simple regex search so it doesn't have to work in all cases. Also, it probably works only with Perl 5.
 
 ## Notes
 - needs `perl` in your `PATH`
